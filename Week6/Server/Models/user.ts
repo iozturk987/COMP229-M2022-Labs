@@ -38,7 +38,7 @@ declare global
 UserSchema.plugin(passportLocalMongoose);
 
 // Step 4 - Create a Model using the Schema
-const Model = mongoose.model("User", UserSchema);
+const Model = mongoose.model("User", UserSchema as PassportLocalSchema);
 
 // Step 5 - Export the Model -> this makes the file a module
 export default Model;
