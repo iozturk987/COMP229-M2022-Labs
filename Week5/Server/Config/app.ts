@@ -4,9 +4,29 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import indexRouter from '../Routes/index'; 
+// Step 1-  import db package
+import mongoose from 'mongoose';
+
+// import the router data
+import indexRouter from '../Routes/index'; // top-level routes
 
 const app = express();
+
+// Step 2 - Complete the DB Configuration
+import * as DBConfig from './db';
+mongoose.connect(DBConfig.LocalURI);
+const db = mongoose.connection; // alias for the mongoose connection
+
+// Step 3 - Listen for Connections or Errors
+db.on("open", function()
+{
+  console.log(`Connected to MongoDB at: ${DBConfig.HostName}`);
+});
+
+db.on("error", function()
+{
+  console.error(`Connection Error`);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, '../Views'));
@@ -19,6 +39,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../Client')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
+// use routes
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
