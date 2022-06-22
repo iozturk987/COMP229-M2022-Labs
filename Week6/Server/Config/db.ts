@@ -1,3 +1,4 @@
 export const LocalURI = "mongodb://127.0.0.1/media";
-export const HostName = "localhost";
+export const RemoteURI = "mongodb+srv://ibrahim:JqmkYSPLsLPjwrXO@cluster0.aefmpx9.mongodb.net/?retryWrites=true&w=majority";
+export const HostName = "MongoDB Atlas";
 export const Secret = "someSecret";
